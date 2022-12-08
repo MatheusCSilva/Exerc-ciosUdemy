@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <title>Udemy exercício</title>
@@ -8,6 +9,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>exercicios html </h1>
@@ -20,18 +22,20 @@
         <a href wm-nav="/html/exercicios/lista.html">03-Lista</a>
         <a href wm-nav="/html/exercicios/listaaninhada.html">04-ListaAninhada</a>
         <a href wm-nav="/html/exercicios/links.html">05- Links</a>
-        <a href wm-nav="/html/exercicios/edgar.html">06- edgar</a>
+        <a href wm-nav="/html/exercicios/tabela.html">06- tabela</a>
+        <a href wm-nav="/html/exercicios/form/form.html">07- Formuláro</a>
 
     </nav>
+
     <section id="conteudo"></section>
     <footer>
         Curso de web moderno
     </footer>
     <script>
-        document.querySelectorAll('[wm-nav]').forEach(link =>{
+        document.querySelectorAll('[wm-nav]').forEach(link => {
             const conteudo = document.getElementById('conteudo')
-            
-            link.onclick = function(e) {
+
+            link.onclick = function (e) {
                 e.preventDefault()
                 fetch(link.getAttribute('wm-nav'))
                     .then(resp => resp.text())
@@ -41,4 +45,5 @@
         })
     </script>
 </body>
+
 </html>
