@@ -11,8 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "1.18.2",
+    "body-parser": "^1.20.1",
     "express": "^4.16.3",
     "form-data": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
