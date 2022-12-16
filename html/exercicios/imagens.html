@@ -1,36 +1,49 @@
-<p>
-    <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg" alt="Muro da Cidade" width="513" height="342"
-        title="Muro Da Cidade">
-</p>
+<div wm-slider>
+    <p>
+        <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg" alt="Muro da Cidade" width="513" height="342"
+            title="Muro Da Cidade">
+    </p>
 
-<p>
-    <img src="http://files.cod3r.com.br/curso-web/imagem2.gif" alt=" intro cod3r" height=" 342">
-</p>
+    <p>
+        <img src="http://files.cod3r.com.br/curso-web/imagem2.gif" alt=" intro cod3r" height=" 342" title="Cod3r Gif">
+    </p>
 
-<p class="circular">
-    <img src="http://files.cod3r.com.br/curso-web/imagem3.png" alt="Rio de janeiro" height="342">
-</p>
+    <p class="circular">
+        <img src="http://files.cod3r.com.br/curso-web/imagem3.png" alt="Rio de janeiro" height="342"
+            title="Rio De Janeiro">
+    </p>
 
-<p class="texto">
-    <img src="http://files.cod3r.com.br/curso-web/avatar.jpg" alt="50" height="50" align="left">O Rio de Janeiro é
-    uma
-    cidade maravilhosa com muitas belezas naturais e culturais. É famosa pelas suas praias de areia branca e água
-    azul-turquesa, como Copacabana e Ipanema, além do Pão de Açúcar e do Cristo Redentor, dois dos marcos mais
-    reconhecidos da cidade. A cidade também é conhecida por sua animada vida noturna e culinária deliciosa. É um
-    ótimo
-    lugar para visitar e se divertir.<strong>Rio de janeiro, 10 de agosto de 2022</strong>
-</p>
+    <p class="texto">
+        <img src="http://files.cod3r.com.br/curso-web/avatar.jpg" title="Avatar" alt="50" height="50" align="left">O Rio
+        de
+        Janeiro é
+        uma
+        cidade maravilhosa com muitas belezas naturais e culturais. É famosa pelas suas praias de areia branca e água
+        azul-turquesa, como Copacabana e Ipanema, além do Pão de Açúcar e do Cristo Redentor, dois dos marcos mais
+        reconhecidos da cidade. A cidade também é conhecida por sua animada vida noturna e culinária deliciosa. É um
+        ótimo
+        lugar para visitar e se divertir.<br><strong>Rio de janeiro, 10 de agosto de 2022</strong>
+    </p>
 
-<p class="cidade"></p>
+    <p class="cidade"></p>
 
-<p>
-    <picture>
-        <source srcset="http://files.cod3r.com.br/curso-web/logo-larga.png" media="(min-width: 600px">
-        <img src="http://files.cod3r.com.br/curso-web/logo-estreita.png" alt="logo">
-    </picture>
-</p>
+    <p>
+        <picture>
+            <source srcset="http://files.cod3r.com.br/curso-web/logo-larga.png" media="(min-width: 600px"
+                title="cidade">
+            <img src="http://files.cod3r.com.br/curso-web/logo-estreita.png" alt="logo" title="Logo">
+        </picture>
+    </p>
+
+</div>
+
 
 <style>
+    p {
+        position: absolute;
+        display: none;
+    }
+
     .circular {
         width: 513px;
         background-color: grey;
@@ -42,11 +55,12 @@
 
     .texto img {
         margin-right: 10px;
-
     }
 
     .texto {
-        font-size: 25px;
+        font-size: 17px;
+        color: black;
+        font-style: italic;
     }
 
     .cidade {
@@ -58,3 +72,43 @@
         background-size: 200%;
     }
 </style>
+<script>
+    function mover(elem, inicio, fim, passo, callback) {
+        const novoInicio = inicio - passo;
+        if (novoInicio >= fim) {
+            elem.style.left = novoInicio + 'px';
+            setTimeout(() => mover(elem, novoInicio, fim, passo, callback), 7);
+        } else {
+            callback();
+        }
+    }
+    const p = document.querySelector('[wm-slider] > p')
+    p.style.display = 'block'
+    mover(p, 1500, -520, 5, () => {
+        console.log('terminou!!')
+    })
+
+    function slider() {
+        const elementos = document.querySelectorAll('[wm-slider] >p')
+        const slides = Array.from(elementos)
+        exibirSlide(slides, slides[0])
+    }
+    function exibirSlide(slides, slide) {
+        slide.style.display = 'block'
+
+        const inicio = innerWidth
+        const fim = -slide.clientWidth
+
+        slide.style.left = '${inicio}px'
+
+        mover(slide, inicio, fim, 5, () => {
+            slide.style.display = 'none'
+            exibirSlide(slides, getProximo(slides, slide))
+        })
+    }
+    function getProximo(lista, atual) {
+        const i = lista.indexOf(atual) + 1
+        return i < lista.length ? lista[i] : lista[0]
+    }
+    slider()
+</script>
